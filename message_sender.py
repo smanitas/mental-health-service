@@ -1,5 +1,6 @@
-import pymsteams
 import logging
+import pymsteams
+import requests
 
 logger = logging.getLogger("ContentCreationLogger")
 
@@ -13,6 +14,11 @@ class MessageSender:
             teams_message = pymsteams.connectorcard(self.webhook_url)
             teams_message.text(content)
             teams_message.send()
-            logger.info("Content is succesfully sent to Microsoft Teams")
+            logger.info(content)
+            logger.info("Content is succesfully sent to Teams")
+        except pymsteams.TeamsWebhookException as e:
+            logger.error(f"Failed to send content to Teams due to webhook error: {e}")
+        except requests.RequestException as e:
+            logger.error(f"Failed to send content to Teams due to network connectivity issue: {e}")
         except Exception as e:
-            logger.error(f"Error sending content to Microsoft Teams: {e}")
+            logger.error(f"An unexpected error while sending content to Teams: {e}")

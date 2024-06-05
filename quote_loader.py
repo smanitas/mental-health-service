@@ -1,5 +1,5 @@
-import requests
 import logging
+import requests
 
 logger = logging.getLogger("ContentCreationLogger")
 
@@ -13,8 +13,8 @@ class QuoteLoader:
             response = requests.get(self.api_url)
             response.raise_for_status()
             quote_data = response.json()[0]
-            quote = quote_data.get('q')
-            author = quote_data.get('a')
+            quote = quote_data.get("q")
+            author = quote_data.get("a")
             if quote and author:
                 logger.info("Quote is successfully loaded")
                 return f"{quote} — {author}"
