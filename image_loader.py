@@ -1,12 +1,15 @@
 import logging
+import os
 import requests
 
 logger = logging.getLogger("ContentCreationLogger")
 
+IMAGE_API_URL = os.getenv("IMAGE_API_URL")
 
-class ImageLoader:
-    def __init__(self, api_url):
-        self.api_url = api_url
+
+class UnsplashImageLoader:
+    def __init__(self):
+        self.api_url = IMAGE_API_URL
 
     def get_image(self):
         try:
