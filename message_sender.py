@@ -12,8 +12,13 @@ class TeamsMessageSender:
     def __init__(self):
         self.webhook_url = WEBHOOK_URL
 
-    def send_to_teams(self, content):
+    def send_to_teams(self, content_data):
         try:
+            content = (
+                f"Sent by {content_data['author']}\n\n"
+                f"Quote: {content_data['quote']}\n\n"
+                f"![Image]({content_data['image_url']})"
+            )
             teams_message = pymsteams.connectorcard(self.webhook_url)
             teams_message.text(content)
             teams_message.send()

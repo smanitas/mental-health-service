@@ -4,12 +4,17 @@ import requests
 
 logger = logging.getLogger("ContentCreationLogger")
 
-IMAGE_API_URL = os.getenv("IMAGE_API_URL")
+UNSPLASH_TOKEN = os.getenv("UNSPLASH_TOKEN")
 
 
 class UnsplashImageLoader:
     def __init__(self):
-        self.api_url = IMAGE_API_URL
+        self.api_url = (
+            f"https://api.unsplash.com/photos/random"
+            f"?query=nature"
+            f"&orientation=landscape"
+            f"&client_id={UNSPLASH_TOKEN}"
+        )
 
     def get_image(self):
         try:

@@ -1,15 +1,12 @@
 import logging
-import os
 import requests
 
 logger = logging.getLogger("ContentCreationLogger")
 
-QUOTE_API_URL = os.getenv("QUOTE_API_URL")
-
 
 class QuotableQuoteLoader:
     def __init__(self):
-        self.api_url = QUOTE_API_URL
+        self.api_url = "https://api.quotable.io/random?tags=Happiness"
 
     def get_quote(self):
         try:

@@ -1,8 +1,9 @@
 import logging
 import os
+
 from image_loader import UnsplashImageLoader
-from quote_loader import QuotableQuoteLoader
 from message_sender import TeamsMessageSender
+from quote_loader import QuotableQuoteLoader
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("ContentCreationLogger")
@@ -25,11 +26,15 @@ class ContentCreator:
             return None
 
         logger.info("Content is created")
-        return f"Sent by {self.author_name}\n\nQuote: {quote}\n\n![Image]({image})"
+        return {
+            "author": self.author_name,
+            "quote": quote,
+            "image_url": image
+        }
 
     def run(self):
-        content = self._create_content()
-        if content:
-            self.message_sender.send_to_teams(content)
+        content_data = self._create_content()
+        if content_data:
+            self.message_sender.send_to_teams(content_data)
         else:
             logger.error("Nothing to send to Microsoft Teams")
