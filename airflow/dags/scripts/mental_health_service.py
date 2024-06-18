@@ -12,7 +12,7 @@ from airflow.hooks.base import BaseHook
 from airflow.models import Variable
 
 SENDER_NAME = Variable.get("SENDER_NAME")
-FONT_PATH = "/opt/airflow/dags/week_3/scripts/DejaVuSans-Bold.ttf"
+FONT_PATH = "/opt/airflow/dags/scripts/DejaVuSans-Bold.ttf"
 
 
 def _load_quote(ti):
