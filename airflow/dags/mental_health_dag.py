@@ -31,7 +31,7 @@ with DAG(
     start_date=pendulum.datetime(2024, 6, 18, tz="UTC"),
     schedule_interval="0 10 * * *",
     catchup=False,
-    tags=["msi_7", "daily_mental_service"]
+    tags=["msi_6", "msi_7", "daily_mental_service"]
 ) as dag:
 
     start_op = EmptyOperator(task_id="start")
