@@ -96,7 +96,10 @@ def _upload_image_to_freeimage(image_io):
 
     url = "https://freeimage.host/api/1/upload"
     files = {"source": ("image.png", image_io, "image/png")}
-    data = {"key": freeimage_key, "action": "upload"}
+    data = {
+        "key": freeimage_key,
+        "action": "upload"
+    }
     response = requests.post(url, files=files, data=data)
 
     if response.status_code == 200:
@@ -113,13 +116,10 @@ def _upload_image_to_freeimage(image_io):
 def _send_to_teams(ti):
     teams_conn = BaseHook.get_connection("TEAMS_WEBHOOK")
     webhook_url = teams_conn.host
-
     image_url = ti.xcom_pull(task_ids="create_content_image", key="updated_image_url")
-    sender_name = Variable.get("SENDER_NAME")
-    logging.debug(f"Using SENDER_NAME: {sender_name}")
 
     content = (
-        f"Sent by {sender_name}\n\n"
+        f"Sent by {SENDER_NAME}\n\n"
         f"![Image]({image_url})"
     )
 
